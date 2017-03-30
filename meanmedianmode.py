@@ -1,3 +1,5 @@
+import time
+
 
 def median(data):
     data.sort()
@@ -12,12 +14,12 @@ def median(data):
 
 def mode(data):
     most = max(set(data), key=data.count)
-    print('the mode is: ' , most)
+    print('the mode is: ' , most , '\n')
 
 
 def mean(data):
     average = sum(data) / len(data)
-    print('the mean is: ', average)
+    print('\nthe mean is: ', average)
 
 def open_data():
     filename = input('Enter filename: ')
@@ -52,11 +54,21 @@ def source():
     elif method == 'MANUAL':
         dataset = man_enter_data()
         return dataset
+
+def restart():
+    return input('Restart (y/n)? ').lower() == 'y'
+
         
-  
+while True:
+    try:
+        dataset = source()
+        mean(dataset)
+        median(dataset)
+        mode(dataset)
 
-dataset = source()
-mean(dataset)
-median(dataset)
-mode(dataset)
-
+        if not restart(): break            
+        
+    except Exception:
+        print('There is an error in the program. Restarting program...')
+        time.sleep(2)   
+        continue
